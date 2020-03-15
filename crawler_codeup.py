@@ -69,12 +69,27 @@ def crawling_solved_problem():
     # 해결한 문제의 id 리스트 가져오기
     solved_problem_id_list = get_solved_problem_id_list(html)
 
-    for solved_problem_id in solved_problem_id_list:
-        pass
-
-
     # TODO: 반복문으로 맞춘 문제 리스트 돌면서 selenium으로
     #  예)https://codeup.kr/problem.php?id=1001 처럼 들어가서 소스코드 가져오기
+    problem_url_prefix = 'https://codeup.kr/problem.php?id='
+    for solved_problem_id in solved_problem_id_list:
+
+        browser.get(problemset_url + solved_problem_id)
+
+        # TODO:
+        #  1. 문제의 제목 가져오기(위에서 id 리스트 가져올때 미리 가져오는것도 가능)
+        #  2. '내소스1' 들어가서 코드 긁어오기
+        # body > main > div > div: nth - child(6) > div.card - header > a:nth - child(6)
+
+        print(solved_problem_id)
+
+
+
+
+        break
+
+
+
     
     # TODO: 소스코드 파일로 저장하는 함수
 
