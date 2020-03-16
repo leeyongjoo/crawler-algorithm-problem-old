@@ -62,7 +62,8 @@ def crawling_solved_problem():
             problem_dict = {}
             if problem_tr.select_one('td:nth-child(1) > div').get_text() == 'Y':
                 problem_dict['id'] = problem_tr.select_one('td:nth-child(2) > div').get_text()
-                problem_dict['name'] = problem_tr.select_one('td:nth-child(3) > div').get_text().replace('(설명)', '')
+                problem_dict['name'] = problem_tr.select_one('td:nth-child(3) > div').get_text()\
+                    .replace('(설명)', '').replace('?', '')
                 solved_problem_dict_list.append(problem_dict)
         return solved_problem_dict_list
 
@@ -75,7 +76,7 @@ def crawling_solved_problem():
     # TODO: 반복문으로 맞춘 문제 리스트 돌면서 selenium으로
     #  예)https://codeup.kr/problem.php?id=1001 처럼 들어가서 소스코드 가져오기
     problem_url_prefix = 'https://codeup.kr/problem.php?id='
-    for problem_dict in solved_problem_dict_list:
+    for problem_dict in solved_problem_dict_list[55:]:
         problem_id = problem_dict['id']
         problem_name = problem_dict['name']
         browser.get(problem_url_prefix + problem_id)
@@ -90,11 +91,23 @@ def crawling_solved_problem():
         problem_info = '_'.join([problem_id, problem_name])
         # TODO: 'codeup/'+problemset_name 폴더 있는지 확인 후 없으면 생성
 
-        filename = '/'.join(['codeup', problemset_name, problem_info])
-        filename = ''.join([filename,'.py'])
 
-        with open(filename, 'w') as f:
-            f.write(problem_source_code)
+        while True:
+            filename = '/'.join(['codeup', problemset_name, problem_info])
+            filename = ''.join([filename,'.py'])
+
+            try:
+                with open(filename, 'w') as f:
+                    f.write(problem_source_code)
+            except FileNotFoundError as e:  # 파일명이 너무 긴경우(python path length limit)
+                print(problem_info)
+                problem_info = ''
+                print(problem_info)
+            except OSError as e2:           # 파일명에 특수문자(\/:*?"<>|)가 들어간경우
+            else:
+                print(filename)
+                break
+
 
     browser.quit()
 
