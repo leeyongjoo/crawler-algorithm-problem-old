@@ -46,69 +46,60 @@ def crawling_solved_problem():
 
     # select problemset
     # 문제집 선택
-    # problemset_url = select_problemset_and_get_url(html)
-    problemset_url = 'https://codeup.kr/problemsetsol.php?psid=9'
+    problemset_name, problemset_url = select_problemset_and_get_name_and_url(html)
 
     # get selected problemset page
     # 선택한 문제집 페이지 접속
     browser.get(problemset_url)
     html = browser.page_source
 
-    def get_solved_problem_id_list(html):
+    def get_solved_problem_dict_list(html):
         soup = BeautifulSoup(html, 'lxml')
         problem_tags_tr = soup.select('#problemset > tbody > tr')
 
-        solved_problem_id_list = []
+        solved_problem_dict_list = []
         for problem_tr in problem_tags_tr:
+            problem_dict = {}
             if problem_tr.select_one('td:nth-child(1) > div').get_text() == 'Y':
-                solved_problem_id_list.append(problem_tr.select_one('td:nth-child(2) > div').get_text())
-
-        return solved_problem_id_list
+                problem_dict['id'] = problem_tr.select_one('td:nth-child(2) > div').get_text()
+                problem_dict['name'] = problem_tr.select_one('td:nth-child(3) > div').get_text().replace('(설명)', '')
+                solved_problem_dict_list.append(problem_dict)
+        return solved_problem_dict_list
 
     # get solved problem list
     # 해결한 문제의 id 리스트 가져오기
-    solved_problem_id_list = get_solved_problem_id_list(html)
+    solved_problem_dict_list = get_solved_problem_dict_list(html)
+
+    print()
 
     # TODO: 반복문으로 맞춘 문제 리스트 돌면서 selenium으로
     #  예)https://codeup.kr/problem.php?id=1001 처럼 들어가서 소스코드 가져오기
     problem_url_prefix = 'https://codeup.kr/problem.php?id='
-    for solved_problem_id in solved_problem_id_list:
+    for problem_dict in solved_problem_dict_list:
+        problem_id = problem_dict['id']
+        problem_name = problem_dict['name']
+        browser.get(problem_url_prefix + problem_id)
 
-        browser.get(problemset_url + solved_problem_id)
+        my_source1_href = browser.find_element_by_css_selector(
+            'body > main > div > div:nth-child(6) > div.card-header > a.btn-primary').get_attribute('href')
 
-        # TODO:
-        #  1. 문제의 제목 가져오기(위에서 id 리스트 가져올때 미리 가져오는것도 가능)
-        #  2. '내소스1' 들어가서 코드 긁어오기
-        # body > main > div > div: nth - child(6) > div.card - header > a:nth - child(6)
+        browser.get(my_source1_href)
+        problem_source_code = browser.find_element_by_css_selector('#source > div.ace_scroller').text
 
-        print(solved_problem_id)
+        # 문제집 명/id_name으로 파일 저장
+        problem_info = '_'.join([problem_id, problem_name])
+        # TODO: 'codeup/'+problemset_name 폴더 있는지 확인 후 없으면 생성
 
+        filename = '/'.join(['codeup', problemset_name, problem_info])
+        filename = ''.join([filename,'.py'])
 
-
-
-        break
-
-
-
-    
-    # TODO: 소스코드 파일로 저장하는 함수
-
-
-    # print(browser.find_element_by_css_selector('#problemset > tbody > tr'))
-
-    # for problem in problems:
-    #     num = problem.select_one('td:nth-child(2) > div').get_text()
-    #     name = problem.find('a').get_text().replace('(설명)', '')
-    #     print('_'.join([num, name]))
-
-
-    # import time
-    # time.sleep(3)
+        with open(filename, 'w') as f:
+            f.write(problem_source_code)
 
     browser.quit()
 
 
-def select_problemset_and_get_url(html):
+def select_problemset_and_get_name_and_url(html):
     soup = BeautifulSoup(html, 'lxml')
     problemsets_tags_a = soup.select('body > main > div > div > div.col-4 > div > a')
 
@@ -126,8 +117,9 @@ def select_problemset_and_get_url(html):
         except Exception as e:
             pass
 
-    problemset_url = CODEUP_URL + problemsets_dict[tuple(problemsets_dict.keys())[problemset_index]]
-    return problemset_url
+    problemset_name = tuple(problemsets_dict.keys())[problemset_index]
+    problemset_url = CODEUP_URL + problemsets_dict[problemset_name]
+    return problemset_name, problemset_url
 
 if __name__ == "__main__":
     crawling_solved_problem()
