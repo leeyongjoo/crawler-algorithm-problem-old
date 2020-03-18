@@ -76,7 +76,7 @@ def crawling_solved_problem():
 
     # 반복문으로 맞춘 문제 리스트 돌면서 browser로 소스코드 가져오기
     problem_url_prefix = 'https://codeup.kr/problem.php?id='
-    for problem_dict in solved_problem_dict_list[55:]:
+    for problem_dict in solved_problem_dict_list:
         problem_id = problem_dict['id']
         problem_name = problem_dict['name']
         browser.get(problem_url_prefix + problem_id)
@@ -95,7 +95,6 @@ def crawling_solved_problem():
         # TODO: 'codeup/'+problemset_name 폴더 있는지 확인 후 없으면 생성
 
         first_line = '# ' +' : '.join([problem_id, problem_name]) + '\n'
-        flag = False
         while True:
             filename = '/'.join(['codeup', problemset_name, problem_info])
             filename = ''.join([filename, '.py'])
@@ -104,20 +103,19 @@ def crawling_solved_problem():
                     # 첫줄에 주석으로 아이디, 문제 이름 추가
                     f.write(first_line)
                     f.write(problem_source_code)
-            except FileNotFoundError as e:  # 파일명이 너무 긴경우(python path length limit)
-                print(e)
-                pass
+            # 파일명에 '/'가 들어간 경우 or 파일명이 너무 긴경우(python path length limit)
+            except FileNotFoundError as e:
+                problem_info = problem_info.replace('/', ',')
+                continue
             except OSError as e:            # 파일명에 특수문자(\/:*?"<>|)가 들어간경우
-                if flag:
-                    print(filename, 'Error!')
-                    print(e)
-                    break
-                problem_info = problem_info.replace('/',',')
-                flag = True
-
+                print('filename: ',filename)
+                print(e)
+            except Exception as e:
+                print('filename: ', filename)
+                print(e)
             else:
-                break
-
+                print(filename, '저장완료!')
+            break
 
     browser.quit()
 
