@@ -36,7 +36,7 @@ def crawling_solved_problem():
         browser.find_element_by_css_selector('body > div.container.mt-5.mb-5 > form > input').click()
     except selenium.common.exceptions.UnexpectedAlertPresentException as e:
         print(e)
-        # TODO : 콘솔로 ID, PW  다시 요청
+        # TODO : 콘솔로 ID, PW  다시 요청, while True
         return -1
 
     # get problemset page
@@ -71,10 +71,10 @@ def crawling_solved_problem():
     # 해결한 문제의 id 리스트 가져오기
     solved_problem_dict_list = get_solved_problem_dict_list(html)
 
-    print()
+    # TODO: 밑으로 진행하기 전에 해당 id의 파일이 이미 존재하는지 검사해서
+    #  존재하면 리스트에서 제외
 
-    # TODO: 반복문으로 맞춘 문제 리스트 돌면서 selenium으로
-    #  예)https://codeup.kr/problem.php?id=1001 처럼 들어가서 소스코드 가져오기
+    # 반복문으로 맞춘 문제 리스트 돌면서 browser로 소스코드 가져오기
     problem_url_prefix = 'https://codeup.kr/problem.php?id='
     for problem_dict in solved_problem_dict_list[55:]:
         problem_id = problem_dict['id']
@@ -88,24 +88,34 @@ def crawling_solved_problem():
         problem_source_code = browser.find_element_by_css_selector('#source > div.ace_scroller').text
 
         # 문제집 명/id_name으로 파일 저장
-        problem_info = '_'.join([problem_id, problem_name])
+        # problem_info = '_'.join([problem_id, problem_name])
+        # 파일명이 너무 길어 오류가 발생하는 일이 생겨 파일명을 '아이디값_[문제유형]' 형식으로 저장
+        problem_info = '_'.join([problem_id, problem_name[:problem_name.index(']')+1]])
+
         # TODO: 'codeup/'+problemset_name 폴더 있는지 확인 후 없으면 생성
 
-
+        first_line = '# ' +' : '.join([problem_id, problem_name]) + '\n'
+        flag = False
         while True:
             filename = '/'.join(['codeup', problemset_name, problem_info])
-            filename = ''.join([filename,'.py'])
-
+            filename = ''.join([filename, '.py'])
             try:
-                with open(filename, 'w') as f:
+                with open(filename, 'w', encoding='utf-8') as f:
+                    # 첫줄에 주석으로 아이디, 문제 이름 추가
+                    f.write(first_line)
                     f.write(problem_source_code)
             except FileNotFoundError as e:  # 파일명이 너무 긴경우(python path length limit)
-                print(problem_info)
-                problem_info = ''
-                print(problem_info)
-            except OSError as e2:           # 파일명에 특수문자(\/:*?"<>|)가 들어간경우
+                print(e)
+                pass
+            except OSError as e:            # 파일명에 특수문자(\/:*?"<>|)가 들어간경우
+                if flag:
+                    print(filename, 'Error!')
+                    print(e)
+                    break
+                problem_info = problem_info.replace('/',',')
+                flag = True
+
             else:
-                print(filename)
                 break
 
 
@@ -113,6 +123,11 @@ def crawling_solved_problem():
 
 
 def select_problemset_and_get_name_and_url(html):
+    """
+    콘솔에 문제집 리스트 출력하여 선택받고 선택한 문제집의 name, url 반환
+    :param html:
+    :return: name(str), url(str)
+    """
     soup = BeautifulSoup(html, 'lxml')
     problemsets_tags_a = soup.select('body > main > div > div > div.col-4 > div > a')
 
@@ -136,4 +151,3 @@ def select_problemset_and_get_name_and_url(html):
 
 if __name__ == "__main__":
     crawling_solved_problem()
-    pass
