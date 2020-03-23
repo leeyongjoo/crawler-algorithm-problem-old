@@ -26,7 +26,7 @@
 
 ## Programmers
 해결할 문제 가져와서 자동으로 세팅
-
-1. Programmers 접속
-
-... `.py` 파일로 저장
+(`.py` 파일 생성)
+<img src="/example_media/example_programmers1.png" width="70%" title="프로그래머스 예1" alt="Example 1 Programmers"></img><br/>
+![](example_media/example_programmers1.png){: width="100%" height="100%"}
+![](example_media/example_programmers2.png){: width="80" height="100"}
