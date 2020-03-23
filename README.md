@@ -19,10 +19,14 @@
 해결한 문제의 소스코드 가져오기
 > 로그인 필요
 
-1. CodeUp 로그인
+1. CodeUp 자동 로그인(로그인 정보는 json file 로드하여 사용)
 2. 문제집 선택
 3. 해당 문제집의 문제 중에서 해결한 문제의 소스코드 수집
 4. 해당 문제집 폴더에 `.py` 파일로 저장
+
+<img src="/example_media/example_codeup1.gif" width="700" title="코드업 예1" alt="Example 1 codeup"></img><br/>
+<img src="/example_media/example_codeup2.png" width="400" title="코드업 예2" alt="Example 2 codeup"></img><br/>
+
 
 ## Programmers
 해결할 문제 가져와서 자동으로 세팅
