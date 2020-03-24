@@ -1,10 +1,10 @@
 # python-algorithm
 파이썬 알고리즘 소스코드
 
-# [CodeUp](https://www.codeup.kr/index.php)
+## [CodeUp](https://www.codeup.kr/index.php)
 - 기초 100제 `Completed`
 
-# [Programmers](https://programmers.co.kr/)
+## [Programmers](https://programmers.co.kr/)
 - level 1 `In Progress`
 
 ---
