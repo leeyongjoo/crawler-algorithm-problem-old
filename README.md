@@ -1,10 +1,10 @@
 # python-algorithm
 파이썬 알고리즘 소스코드
 
-# [CodeUp](https://www.codeup.kr/index.php)
+## [CodeUp](https://www.codeup.kr/index.php)
 - 기초 100제 `Completed`
 
-# [Programmers](https://programmers.co.kr/)
+## [Programmers](https://programmers.co.kr/)
 - level 1 `In Progress`
 
 ---
@@ -24,7 +24,7 @@
 3. 해당 문제집의 문제 중에서 해결한 문제의 소스코드 수집
 4. 해당 문제집 폴더에 `.py` 파일로 저장
 
-<img src="/example_media/example_codeup1.gif" width="700" title="코드업 예1" alt="Example 1 codeup"></img><br/>
+<img src="/example_media/example_codeup.gif" width="700" title="코드업 예1" alt="Example 1 codeup"></img><br/>
 <img src="/example_media/example_codeup2.png" width="400" title="코드업 예2" alt="Example 2 codeup"></img><br/>
 
 
