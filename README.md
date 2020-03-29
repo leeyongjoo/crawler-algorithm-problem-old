@@ -1,4 +1,4 @@
-# python-algorithm
+# python-algorithm-automation
 파이썬 알고리즘 소스코드
 
 ## [CodeUp](https://www.codeup.kr/index.php)
