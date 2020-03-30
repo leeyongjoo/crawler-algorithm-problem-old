@@ -33,4 +33,5 @@
 (`.py` 파일 생성)   
 
 <img src="/example_media/example_programmers1.png" width="500" title="프로그래머스 예1" alt="Example 1 Programmers"></img><br/>
+<img src="/example_media/example_programmers3.png" width="1100" title="프로그래머스 예3" alt="Example 3 Programmers"></img><br/>
 <img src="/example_media/example_programmers2.png" width="1100" title="프로그래머스 예2" alt="Example 2 Programmers"></img><br/>
