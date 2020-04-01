@@ -23,7 +23,7 @@ def crawling_solved_problem():
     CODEUP_ID, CODEUP_PW = login_json_data['userId'], login_json_data['userPw']
 
     # use Chrome webdriver
-    browser = selenium.webdriver.Chrome("./driver/chromedriver.exe")
+    browser = selenium.webdriver.Chrome("chromedriver.exe")
     # wait 5 minutes
     browser.implicitly_wait(5)
 
