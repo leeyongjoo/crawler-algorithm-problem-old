@@ -1,5 +1,6 @@
 # python-algorithm-automation
 파이썬 알고리즘 소스코드
+> PS 코드 업로드할 거라 master branch로만 진행
 
 ## [CodeUp](https://www.codeup.kr/index.php)
 - 기초 100제 `Completed`
