@@ -40,6 +40,11 @@ def crawling_problem():
         p_input_list.append([a.get_text() for a in i])
         p_output_list.append(o.get_text())
 
+    # output 중에서 bool 타입은 capitalize
+    for i, s in enumerate(p_output_list):
+        if s in ['true', 'false']:
+            p_output_list[i] = s.capitalize()
+
     test_code_list = []
     for i, o in zip(p_input_list, p_output_list):
         test_code_list.append('print(solution({}) == {})'.format(', '.join(i), o))
