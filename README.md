@@ -14,7 +14,7 @@
 - 해결할 문제의 정답 양식, 입력값, 출력값을 가져와서 파일로 저장
 
 ## Installation
-[pip](https://pip.pypa.io/en/stable/)를 사용하여 라이브러리 설치 *Python Version: 3.8*
+[pip](https://pip.pypa.io/en/stable/)를 이용하여 라이브러리 설치 *Python Version: 3.8*
 ```bash
 pip install -r requirements.txt
 ```
