@@ -1,4 +1,4 @@
-# python-algorithm-automation
+# python-algorithm-automation 
 파이썬 알고리즘 소스코드
 > PS 코드 업로드할 거라 master branch로만 진행
 
@@ -12,6 +12,12 @@
 # Automation
 - 해결한 문제의 소스코드를 가져와서 파일로 저장
 - 해결할 문제의 정답 양식, 입력값, 출력값을 가져와서 파일로 저장
+
+## Installation
+[pip](https://pip.pypa.io/en/stable/)를 사용하여 라이브러리 설치 *Python Version: 3.8*
+```bash
+pip install -r requirements.txt
+```
 
 ### 사용한 라이브러리
 - `requests`, `selenium`, `bs4`, `lxml`, `json`
