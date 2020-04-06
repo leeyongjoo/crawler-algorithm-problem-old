@@ -18,8 +18,6 @@
 ```bash
 pip install -r requirements.txt
 ```
-
-### 사용한 라이브러리
 - `requests`, `selenium`, `bs4`, `lxml`, `json`
 
 ## CodeUp
