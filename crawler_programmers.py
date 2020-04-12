@@ -4,6 +4,9 @@ import os, pprint
 
 DIR_PATH = 'programmers/'
 LEVEL_DIR_PATH = lambda x: 'level{}/'.format(x)
+SPECIAL_CHARACTER = [
+    '\\','/',':','*','?','"','<','>','|'
+]
 
 def crawling_problem():
     p_level = input('input Problem Level\n>> ')
@@ -25,6 +28,10 @@ def crawling_problem():
     p_name = soup.select_one('body > div.navbar.navbar-dark.navbar-expand-lg.navbar-application.navbar-breadcrumb '
                                '> ol > li.active').get_text()
     filename = '[{}] {}'.format(p_category, p_name)
+
+    # 파일 이름에 특수문자 제거
+    for c in SPECIAL_CHARACTER:
+        filename = filename.replace(c,'')
 
     # 코드
     code = soup.select_one('#code').get_text()
