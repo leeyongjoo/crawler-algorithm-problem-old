@@ -4,6 +4,10 @@ def solution(num):
         return "Even"
     else:
         return "Odd"
+
+#다른 풀이
+def solution(num):
+    return (num % 2 and "Odd") or "Even"
     
 if __name__ == "__main__":
     print(solution(3) == "Odd")
