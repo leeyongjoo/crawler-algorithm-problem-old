@@ -54,6 +54,7 @@ def crawling_problem():
 
     test_code_list = []
     for i, o in zip(p_input_list, p_output_list):
+        test_code_list.append('print(solution({}))'.format(', '.join(i)))
         test_code_list.append('print(solution({}) == {})'.format(', '.join(i), o))
 
     test_code = '\n    '.join(test_code_list)
