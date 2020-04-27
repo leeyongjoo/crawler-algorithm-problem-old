@@ -21,6 +21,23 @@ def solution(bridge_length, weight, truck_weights):
             used_weight += tw1
     return time_count
 
+# 다른 풀이
+def solution(bridge_length, weight, truck_weights):
+    from collections import deque
+    bw = deque([0]*bridge_length)
+    bw_used_weight = 0
+    time_count = 0
+
+    while truck_weights or bw_used_weight:
+        bw_used_weight -= bw.popleft()
+        if truck_weights and truck_weights[0] + bw_used_weight <= weight:
+                bw.append(truck_weights.pop(0))
+                bw_used_weight += bw[-1]
+        else:
+            bw.append(0)
+        time_count += 1
+    return time_count
+
 if __name__ == "__main__":
     print(solution(2, 10, [7,4,5,6]))
     print(solution(2, 10, [7,4,5,6]) == 8)
