@@ -6,7 +6,7 @@
 - 기초 100제 `Completed`
 
 ## [Programmers](https://programmers.co.kr/)
-- level 1 `Completed` 20.04.16
+- level 1 `Completed`
 - level 2 `In Progress`
 
 ---
