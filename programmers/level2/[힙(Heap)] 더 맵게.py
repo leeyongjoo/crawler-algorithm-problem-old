@@ -4,6 +4,8 @@ def solution(scoville, K):
     heap1 = scoville[:]
     heapq.heapify(heap1)
     mix_count = 0
+    if heap1[0] >= K:
+            return mix_count
     while len(heap1) > 1:   # len() -> O(1)
         mix_count += 1
         h1 = heapq.heappop(heap1)
