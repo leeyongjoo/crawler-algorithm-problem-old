@@ -1,26 +1,14 @@
-# python-problem-solving
-파이썬 알고리즘 문제해결 소스코드
-> PS 코드 업로드할 거라 master branch로만 진행
+# crawler-algorithm-problem
+- Programmers: 해결할 문제의 정답 양식, 입력값, 출력값을 가져와서 파일로 저장
+- CodeUp: 해결한 문제의 소스코드를 가져와서 파일로 저장
 
-## [CodeUp](https://www.codeup.kr/index.php)
-- 기초 100제 `Completed`
+## Requirements
+- `Python` 3
+- `requests`, `selenium`, `bs4`, `lxml`, `json`
 
-## [Programmers](https://programmers.co.kr/)
-- level 1 `Completed`
-- level 2 `In Progress`
-
----
-
-# Crawler
-- 해결한 문제의 소스코드를 가져와서 파일로 저장
-- 해결할 문제의 정답 양식, 입력값, 출력값을 가져와서 파일로 저장
-
-## Installation
-[pip](https://pip.pypa.io/en/stable/)를 이용하여 라이브러리 설치 *Python Version: 3.8*
 ```bash
 pip install -r requirements.txt
 ```
-- `requests`, `selenium`, `bs4`, `lxml`, `json`
 
 ## Programmers
 해결할 문제 가져와서 자동으로 세팅
