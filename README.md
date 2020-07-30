@@ -3,7 +3,7 @@
 - CodeUp: 해결한 문제의 소스코드를 가져와서 파일로 저장
 
 ## Requirements
-- `Python` 3
+- `Python` 3.x
 - `requests`, `selenium`, `bs4`, `lxml`, `json`
 
 ```bash
