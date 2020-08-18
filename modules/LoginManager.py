@@ -36,7 +36,7 @@ class LoginManager(object):
             try:
                 with open(self.json_file) as f:
                     json_data = json.load(f)
-            except FileNotFoundError as e:
+            except FileNotFoundError:
                 print(f'<< 로그인 정보 파일 생성 >>')
                 print(f'>> 로그인 정보 파일 생성', '성공.' if self._write_json() else '실패!')
             else:
