@@ -22,9 +22,9 @@ class LoginManager(object):
     def __init__(self, name):
         self.site_name = name
         self.json_dirname = BASE_DIR / self._JSON_DIR
-        self.json_basename = ''.join([site_name, self._JSON_SUFFIX])
+        self.json_basename = ''.join([self.site_name, self._JSON_SUFFIX])
         self.json_file = self.json_dirname / self.json_basename
-        self.json_data = self._load_json_file()
+        # self.json_data = self._load_json_file()
 
     def _load_json_file(self) -> json:
         """
@@ -49,8 +49,8 @@ class LoginManager(object):
         :return: 성공 시 True, 실패 시 False
         """
         login_dict = OrderedDict()
-        login_dict[self._JSON_KEYS['user_id']] = input(f'Input {site_name} User ID: ')
-        login_dict[self._JSON_KEYS['user_pw']] = input(f'Input {site_name} User PW: ')
+        login_dict[self._JSON_KEYS['user_id']] = input(f'Input {self.site_name} User ID: ')
+        login_dict[self._JSON_KEYS['user_pw']] = input(f'Input {self.site_name} User PW: ')
 
         if os.path.isdir(self.json_dirname) is False:
             os.mkdir(self.json_dirname)
