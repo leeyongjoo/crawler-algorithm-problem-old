@@ -2,7 +2,7 @@ import json
 import os
 from collections import OrderedDict
 from pathlib import Path
-import modules.module_path
+from modules.module_path import mkdir_if_not_exists
 
 # 상위 디렉토리 경로
 # 다음과 같이 경로 연결: BASE_DIR / 'subdir'.
@@ -53,7 +53,7 @@ class LoginManager(object):
         login_dict[self._JSON_KEYS['user_id']] = input(f'Input {self.site_name} User ID: ')
         login_dict[self._JSON_KEYS['user_pw']] = input(f'Input {self.site_name} User PW: ')
 
-        modules.module_path.mkdir_if_not_exists(self.json_dirname)
+        mkdir_if_not_exists(self.json_dirname)
 
         with open(self.json_file, 'w', encoding='utf-8') as f:
             json.dump(login_dict, f, indent=4)
