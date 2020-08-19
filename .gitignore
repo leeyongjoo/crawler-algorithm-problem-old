@@ -1,5 +1,8 @@
 login_info/
 .idea/
+codeup/
+programmers/
+baekjoon/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
