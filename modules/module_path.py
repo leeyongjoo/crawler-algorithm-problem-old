@@ -1,5 +1,8 @@
 import os
 
+def get_dirname(path):
+    return os.path.dirname(os.path.abspath(path))
+
 
 def join_path(*paths):
     return os.path.join(*paths)
