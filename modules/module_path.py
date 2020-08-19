@@ -1,6 +1,10 @@
 import os
 
 
+def join_path(*paths):
+    return os.path.join(*paths)
+
+
 def mkdir_if_not_exists(path_dir):
     while True:
         try:
