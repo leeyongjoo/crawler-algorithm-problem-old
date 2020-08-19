@@ -68,6 +68,10 @@ class LoginManager(object):
         json_data = self._load_json_file()
         return json_data[self._JSON_KEYS['user_id']], json_data[self._JSON_KEYS['user_pw']]
 
+    def write_and_load(self):
+        self._write_json()
+        self._load_json_file()
+
 
 if __name__ == "__main__":
     site_name = 'test'
