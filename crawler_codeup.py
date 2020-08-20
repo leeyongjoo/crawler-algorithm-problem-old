@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver, common
-from modules.LoginManager import LoginManager
+from modules.JSONManager import JSONManager
 from modules.module_path import join_path, get_file_dirname, get_file_list, mkdir_if_not_exists
 from modules.module_string import remove_win_special_char
 
@@ -11,6 +11,9 @@ SITEMAP = {
     'problemsetsol': 'problemsetsol.php',
     'problem': 'problem.php',
 }
+CONFIG_KEYS = [
+    'userId', 'userPw', # 로그인 아이디, 비밀번호
+]
 
 
 def crawling_solved_problem():
@@ -22,11 +25,11 @@ def crawling_solved_problem():
     ##########
     # 로그인 #
     ##########
-    lm = LoginManager(SITE_NAME)
+    lm = JSONManager(SITE_NAME, CONFIG_KEYS)
     login_page = join_path(SITE_URL, SITEMAP['login'])
     browser.get(login_page)
     while True:
-        user_id, user_pw = lm.get_idpw_from_json()
+        user_id, user_pw = lm.get_json_data()['userId'], lm.get_json_data()['userPw']
         browser.find_element_by_css_selector(
             'body > div.container.mt-5.mb-5 > form > div:nth-child(2) > input').send_keys(user_id)
         browser.find_element_by_css_selector(
