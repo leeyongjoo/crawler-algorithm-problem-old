@@ -25,11 +25,11 @@ def crawling_solved_problem():
     ##########
     # 로그인 #
     ##########
-    lm = JSONManager(SITE_NAME, CONFIG_KEYS)
+    jm = JSONManager(SITE_NAME, CONFIG_KEYS)
     login_page = join_path(SITE_URL, SITEMAP['login'])
     browser.get(login_page)
     while True:
-        user_id, user_pw = lm.get_json_data()['userId'], lm.get_json_data()['userPw']
+        user_id, user_pw = jm.get_json_data()['userId'], jm.get_json_data()['userPw']
         browser.find_element_by_css_selector(
             'body > div.container.mt-5.mb-5 > form > div:nth-child(2) > input').send_keys(user_id)
         browser.find_element_by_css_selector(
@@ -43,7 +43,7 @@ def crawling_solved_problem():
         # 로그인 오류
         except common.exceptions.UnexpectedAlertPresentException as e:
             print(e.alert_text)
-            lm.write_and_load()
+            jm.write_and_load()
             browser.find_element_by_css_selector(
                 'body > div.container.mt-5.mb-5 > form > div:nth-child(2) > input').clear()
             browser.find_element_by_css_selector(
