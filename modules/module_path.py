@@ -1,3 +1,6 @@
+"""
+파일, 디렉토리 관련 처리 모듈
+"""
 import os
 
 
@@ -31,6 +34,15 @@ def get_file_list(path_dir):
 
 def is_file(file_path):
     return os.path.isfile(file_path)
+
+
+def get_extension(language):
+    ex_dict = {
+        'python': '.py',
+        'python3': '.py',
+    }
+    return ex_dict[language]
+
 
 if __name__=="__main__":
     print(join_path('1','2'))
