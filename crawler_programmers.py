@@ -79,7 +79,7 @@ def crawling_problem():
                 print(file, '생성 완료')
 
         params['page'] = params['page'] + 1
-        break
+
 
 
 def make_file_content(PROBLEMS_URL):
