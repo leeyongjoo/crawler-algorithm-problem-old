@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver, common
-from modules.LoginManager import LoginManager
+from modules.JSONManager import JSONManager
 from modules.module_path import join_path, get_file_dirname, get_file_list, mkdir_if_not_exists
-from modules.module_string import del_win_special_char
+from modules.module_string import remove_win_special_char
 
 SITE_URL = 'https://codeup.kr/'
 SITE_NAME = 'codeup'
@@ -11,6 +11,9 @@ SITEMAP = {
     'problemsetsol': 'problemsetsol.php',
     'problem': 'problem.php',
 }
+CONFIG_KEYS = [
+    'userId', 'userPw', # 로그인 아이디, 비밀번호
+]
 
 
 def crawling_solved_problem():
@@ -22,11 +25,11 @@ def crawling_solved_problem():
     ##########
     # 로그인 #
     ##########
-    lm = LoginManager(SITE_NAME)
+    jm = JSONManager(SITE_NAME, CONFIG_KEYS)
     login_page = join_path(SITE_URL, SITEMAP['login'])
     browser.get(login_page)
     while True:
-        user_id, user_pw = lm.get_idpw_from_json()
+        user_id, user_pw = jm.get_json_data()['userId'], jm.get_json_data()['userPw']
         browser.find_element_by_css_selector(
             'body > div.container.mt-5.mb-5 > form > div:nth-child(2) > input').send_keys(user_id)
         browser.find_element_by_css_selector(
@@ -40,7 +43,7 @@ def crawling_solved_problem():
         # 로그인 오류
         except common.exceptions.UnexpectedAlertPresentException as e:
             print(e.alert_text)
-            lm.write_and_load()
+            jm.write_and_load()
             browser.find_element_by_css_selector(
                 'body > div.container.mt-5.mb-5 > form > div:nth-child(2) > input').clear()
             browser.find_element_by_css_selector(
@@ -86,7 +89,7 @@ def crawling_solved_problem():
         problem_source_code = browser.find_element_by_css_selector('#source > div.ace_scroller').text
 
         # 문제집 명/id_name으로 파일 저장
-        file_name = '_'.join([problem_id, del_win_special_char(problem_name)])
+        file_name = '_'.join([problem_id, remove_win_special_char(problem_name)])
 
         mkdir_if_not_exists(join_path(get_file_dirname(__file__), SITE_NAME, problemset_name))
 

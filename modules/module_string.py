@@ -1,7 +1,7 @@
 import re
 
 
-def del_win_special_char(before_str):
+def remove_win_special_char(before_str):
     """
     windows에서 파일명으로 사용하지 못하는 특수문자 제거
 
@@ -12,4 +12,4 @@ def del_win_special_char(before_str):
 
 
 if __name__=="__main__":
-    print(del_win_special_char('12\\/:*?"<>|34'))
+    print(remove_win_special_char('12\\/:*?"<>|34'))
