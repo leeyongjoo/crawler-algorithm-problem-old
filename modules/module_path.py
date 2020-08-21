@@ -1,8 +1,5 @@
 import os
 
-def get_file_dirname(file_path):
-    return os.path.dirname(os.path.abspath(file_path))
-
 
 def join_path(*paths):
     return os.path.join(*paths)
@@ -21,12 +18,19 @@ def mkdir_if_not_exists(path_dir):
             break
 
 
+def get_file_dirname(file_path):
+    return os.path.dirname(os.path.abspath(file_path))
+
+
 def get_file_list(path_dir):
     if os.path.isdir(path_dir) is True:
         return os.listdir(path_dir)
     else:
         return []
 
+
+def is_file(file_path):
+    return os.path.isfile(file_path)
 
 if __name__=="__main__":
     print(join_path('1','2'))
