@@ -1,4 +1,10 @@
 # crawler-algorithm-problem
+> 20.08.28 새로 생성해서 리팩토링, 기능 추가 시작
+> - [Programmers repo](https://github.com/leeyongjoo/programmers-automation) 
+> - [Codeup repo](https://github.com/leeyongjoo/codeup-automation)
+
+---
+
 - Programmers: 해결할 문제의 정답 양식, 입력값, 출력값을 가져와서 파일로 저장
 - CodeUp: 해결한 문제의 소스코드를 가져와서 파일로 저장
 
